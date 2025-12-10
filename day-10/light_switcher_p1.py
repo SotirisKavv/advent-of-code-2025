@@ -9,7 +9,7 @@ def umarshal_schematics(line: str):
     b_wirings = [tuple(map(int, wiring.split(','))) for wiring in b_wirings_list]
 
     joltage_reqs_list = re.findall(r'{(.*?)}', line)
-    joltage_reqs = [int(req) for req in joltage_reqs_list[0].split(',')]
+    joltage_reqs = tuple(int(req) for req in joltage_reqs_list[0].split(','))
 
     return light_bin, b_wirings, joltage_reqs
 
@@ -20,6 +20,7 @@ def apply_button(lights, buttons):
 
     return tuple(lists_lights)
 
+# Breadth-First Search to find the shortest sequence
 def shortest_sequence(init_state, goal, actions):
     visited = set()
     queue = deque([(init_state, 0)])
